@@ -27,7 +27,7 @@ class ListingPremium extends ListingBasic
   }
 
   /**
-   * Cleans up and sets the local property $title
+   * Cleans up and sets the local property $description
    * @param string $value to set property
    */
   public function setDescription($value)
