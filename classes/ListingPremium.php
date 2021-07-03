@@ -3,8 +3,19 @@
 class ListingPremium extends ListingBasic
 {
   protected $status = 'premium';
-  private $description;
-  protected $allowed_tags = '<p><br><b><strong><em><u><ol><ul><li>';
+  protected $description;
+  protected static $allowed_tags = '<p><br><b><strong><em><u><ol><ul><li>';
+
+  /**
+   * Calls individual methods to set values for object properties.
+   * @param array $data Data to set from user or database
+   */
+  public function setValues($data = []) {
+    parent::setValues($data);
+    if (isset($data['description'])) {
+      $this->setDescription($data['description']);
+    }
+  }
 
   /**
    * Gets the local property $description
@@ -12,7 +23,7 @@ class ListingPremium extends ListingBasic
    */
   public function getDescription()
   {
-      return $this->description;
+    return $this->description;
   }
 
   /**
@@ -21,6 +32,11 @@ class ListingPremium extends ListingBasic
    */
   public function setDescription($value)
   {
-      $this->description = trim(strip_tags($value, $this->allowed_tags));
+    $this->description = trim(strip_tags($value, self::$allowed_tags));
+  }
+
+  public static function displayAllowedTags()
+  {
+    return htmlspecialchars(self::$allowed_tags);
   }
 }
